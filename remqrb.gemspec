@@ -13,6 +13,10 @@ Gem::Specification.new do |s|
   s.require_path = %w[lib]
 
   s.add_runtime_dependency('redis', "~> 3.0")
+  s.add_runtime_dependency('json', "~> 1.7")
+
+  s.add_development_dependency('rake', "~> 0.9")
+  s.add_development_dependency('yard', "~> 0.8")
 
   # = MANIFEST =
   s.files = %w[

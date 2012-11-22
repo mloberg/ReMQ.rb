@@ -32,6 +32,20 @@ def replace_header(head, header_name)
   head.sub!(/(\.#{header_name}\s*= ').*'/) { "#{$1}#{send(header_name)}'"}
 end
 
+task :default => [:test]
+
+require 'rake/testtask'
+Rake::TestTask.new do |t|
+  t.libs = ["lib", "test"]
+  t.warning = true
+  t.warning = true
+  t.test_files = FileList['test/*_test.rb']
+end
+
+task :doc do
+  sh "yardoc"
+end
+
 ###
 # Packing tasks
 ###
@@ -51,6 +65,8 @@ end
 desc "Clean automatically generated files"
 task :clean do
   FileUtils.rm_rf "pkg"
+  FileUtils.rm_rf ".yardoc"
+  FileUtils.rm_rf "doc"
 end
 
 task :gemspec do
