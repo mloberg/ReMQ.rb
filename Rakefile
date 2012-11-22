@@ -53,13 +53,13 @@ end
 desc "Build gem"
 task :build do
   FileUtils.mkdir_p "pkg"
-  system "gem build #{gemspec.name}.gemspec"
-  FileUtils.mv "#{gemspec.name}-#{gemspec.version}.gem", "pkg"
+  system "gem build #{gemspec_file}"
+  FileUtils.mv gem_file, "pkg"
 end
 
 desc "Install gem locally"
 task :install => :build do
-  system "gem install pkg/#{gemspec.name}-#{gemspec.version}"
+  system "gem install pkg/#{gem_file}"
 end
 
 desc "Clean automatically generated files"

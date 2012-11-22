@@ -1,10 +1,11 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 
-require "ReMQ"
+line = File.read("lib/ReMQ.rb")[/^\s*VERSION\s*=\s*.*/]
+version = line.match(/.*VERSION\s*=\s*['"](.*)['"]/)[1]
 
 Gem::Specification.new do |s|
   s.name        = 'remq-rb'
-  s.version     = ReMQ::VERSION
+  s.version     = version
   s.summary     = "Redis based message queue."
   s.description = "Redis Message Queue (ReMQ) is a message queue backed by the awesome key-value store, Redis."
   s.authors     = ["Matthew Loberg"]
