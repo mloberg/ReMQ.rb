@@ -4,6 +4,7 @@ require "redis"
 require "json"
 
 require "ReMQ/Queue"
+require "ReMQ/Worker"
 
 module ReMQ
   VERSION = '0.0.0'
@@ -48,8 +49,16 @@ module ReMQ
   # @param [Object] job
   # @return [Boolean]
   def is_valid_job?(job)
-    unless job.class == Class and job.methods.include?(:perform)
-      raise BadJobError, "#{job} is not a valid job"
+    # check if is class
+    if job.class != Class and Object.const_defined?(job)
+      job = Object.const_get(job)
+    elsif job.class != Class
+      raise BadJobError, "#{job} is not a class"
+      return false
+    end
+    # check if it has the perform method
+    unless job.methods.include?(:perform)
+      raise BadJobError, "#{job} does not have a perform method"
       return false
     end
     return true
