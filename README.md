@@ -8,7 +8,9 @@ This is the Ruby clone of the original [ReMQ](https://github.com/mloberg/ReMQ) P
 
 ## Getting ReMQ
 
-coming soon
+ReMQ.rb is packaged as a gem, so assuming you have RubyGems installed you simply run `gem install remq-rb` or add it to your Gemfile.
+
+Once it's installed just add `require "ReMQ"` to your script.
 
 ## Jobs
 
