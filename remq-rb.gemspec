@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Matthew Loberg"]
   s.email       = 'm@mloberg.com'
 
-  s.require_path = %w[lib]
+  s.require_paths = %w[lib]
 
   s.add_runtime_dependency('redis', "~> 3.0")
   s.add_runtime_dependency('json', "~> 1.7")
