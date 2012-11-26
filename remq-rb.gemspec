@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.version     = version
   s.summary     = "Redis based message queue."
   s.description = "Redis Message Queue (ReMQ) is a message queue backed by the awesome key-value store, Redis."
+  s.homepage    = 'https://github.com/mloberg/ReMQ.rb'
   s.authors     = ["Matthew Loberg"]
   s.email       = 'm@mloberg.com'
 
@@ -21,7 +22,19 @@ Gem::Specification.new do |s|
 
   # = MANIFEST =
   s.files = %w[
-    lib/RemQ.rb
+    Gemfile
+    LICENSE
+    README.md
+    Rakefile
+    lib/ReMQ.rb
+    lib/ReMQ/Queue.rb
+    lib/ReMQ/Worker.rb
+    remq-rb.gemspec
+    test/helper.rb
+    test/queue_test.rb
+    test/worker_test.rb
   ]
   # = MANIFEST =
+
+  s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }
 end
