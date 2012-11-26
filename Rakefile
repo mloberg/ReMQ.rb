@@ -77,13 +77,13 @@ task :gemspec do
   replace_header(head, :version)
   replace_header(head, :date)
 
-  files = `git ls-files`
-          .split("\n")
-          .sort
-          .reject { |file| file =~ /^\./ }
-          .reject { |file| file =~ /^(pkg)/ }
-          .map { |file| "    #{file}"}
-          .join("\n")
+  files = `git ls-files`.
+          split("\n").
+          sort.
+          reject { |file| file =~ /^\./ }.
+          reject { |file| file =~ /^(pkg)/ }.
+          map { |file| "    #{file}"}.
+          join("\n")
 
   manifest = "  s.files = %w[\n#{files}\n  ]\n"
   spec = [head, manifest, tail].join("  # = MANIFEST =\n")

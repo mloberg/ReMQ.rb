@@ -56,8 +56,10 @@ module ReMQ
       raise BadJobError, "#{job} is not a class"
       return false
     end
+    # Ruby 1.9 uses a symbol for methods, while 1.8 uses strings
+    method = RUBY_VERSION.gsub(/\.\d$/, '') == '1.9' ? :perform : 'perform'
     # check if it has the perform method
-    unless job.methods.include?(:perform)
+    unless job.methods.include?(method)
       raise BadJobError, "#{job} does not have a perform method"
       return false
     end

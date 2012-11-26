@@ -34,7 +34,7 @@ class TestWorker < Test::Unit::TestCase
   end
 
   def test_process
-    def @redis_mock.blpop(*queues, timeout)
+    def @redis_mock.blpop(*args)
       [ 'example', [ 'TestJob', 'foo', 'bar' ].to_json ]
     end
     @worker.run(:count => 1)
@@ -45,14 +45,14 @@ class TestWorker < Test::Unit::TestCase
       assert_equal('example', key)
       assert_equal(['FailingJob'].to_json, value)
     end
-    def @redis_mock.blpop(*queues, timeout)
+    def @redis_mock.blpop(*args)
       [ 'example', [ 'FailingJob' ].to_json ]
     end
     assert_raise(FailingJobError) { @worker.run(:count => 1) }
   end
 
   def test_throws_exception_if_not_valid_job
-    def @redis_mock.blpop(*queues, timeout)
+    def @redis_mock.blpop(*args)
       [ 'example', [ 'BadJob' ].to_json ]
     end
     def @redis_mock.rpush(key, value)

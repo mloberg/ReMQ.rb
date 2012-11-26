@@ -67,8 +67,9 @@ module ReMQ
       #
       # @param [Integer] timeout Redis BLPOP timeout
       def process(timeout)
+        queues = @queues << timeout
         begin
-          queue, job = ReMQ.redis.blpop(*@queues, timeout)
+          queue, job = ReMQ.redis.blpop(*queues)
           if job
             body = JSON.parse(job)
             job_class = body.shift
