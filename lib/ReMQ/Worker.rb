@@ -78,7 +78,7 @@ module ReMQ
             end
           end
         rescue Exception => e
-          ReMQ.redis.rpush(queue, job)
+          ReMQ.redis.rpush(queue, job) if job
           raise e
         end
       end
